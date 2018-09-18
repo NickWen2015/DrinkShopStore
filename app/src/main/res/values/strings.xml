@@ -1,3 +1,31 @@
 <resources>
-    <string name="app_name">DrinkShopStore</string>
+    <string name="app_name">ArrangeActivities</string>
+    <string name="text_Exit">Exit</string>
+    <string name="text_Yes">Yes</string>
+    <string name="text_No">No</string>
+    <string name="msg_WantToExit">Do you really want to exit?</string>
+    <string name="msg_InsertSuccess">Insert successfully</string>
+    <string name="msg_InsertFail">Insert fail</string>
+    <string name="msg_NoNewsFound">No news found</string>
+    <string name="msg_NoNetwork">no network connection available</string>
+    <string name="text_PickPicture">Pick Picture</string>
+    <string name="text_activityName">Activity Name</string>
+    <string name="text_activityDateStart">Start Date</string>
+    <string name="text_activityDateEnd">End Date</string>
+    <string name="text_News">Arrange Activity</string>
+    <string name="msg_NameIsInvalid">News name is invalid</string>
+    <string name="msg_NoImage">No image</string>
+    <string name="msg_UpdateSuccess">Update successfully</string>
+    <string name="msg_UpdateFail">Update fail</string>
+    <string name="msg_DeleteSuccess">Delete successfully</string>
+    <string name="msg_DeleteFail">Delete fail</string>
+    <string name="text_Insert">Insert</string>
+    <string name="text_btCancel">Cancel</string>
+    <string name="text_NewsId">ID</string>
+    <string name="text_Update">UPDATE</string>
+    <string name="text_Delete">DELETE</string>
+    <string name="text_NewsName">活動名稱</string>
+    <string name="text_NewsDateStart">活動開始日期</string>
+    <string name="text_NewsDateEnd">活動結束日期</string>
+
 </resources>

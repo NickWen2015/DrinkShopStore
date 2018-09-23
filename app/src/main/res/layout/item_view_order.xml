@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:padding="6dp"
+    card_view:cardBackgroundColor="#ffdddddd"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="6dp">
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvEmpty"-->
+            <!--android:layout_width="25px"-->
+            <!--android:layout_height="250px" />-->
+
+        <TextView
+            android:id="@+id/tvOrderId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/text_Order_id"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvInvoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvOrderId"
+            android:layout_below="@id/tvOrderId"
+            android:text="@string/text_Invoice"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/tvMember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvInvoice"
+            android:layout_below="@id/tvInvoice"
+            android:text="@string/text_Member"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvMember"
+            android:layout_below="@id/tvMember"
+            android:text="@string/text_OrderDate"
+            android:textColor="#555555" />
+
+        <!--<TextView-->
+            <!--android:id="@+id/tvCompleted"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignLeft="@id/tvDate"-->
+            <!--android:layout_below="@id/tvDate"-->
+            <!--android:lines="1"-->
+            <!--android:textSize="16sp" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/etOrderStatus"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toLeftOf="@id/ivCheck"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:textColor="#555555" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btScanQrCode"-->
+            <!--android:layout_width="300px"-->
+            <!--android:layout_height="100px"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_margin="19dp"-->
+            <!--android:layout_below="@+id/ivCheck"-->
+            <!--android:text="@string/textScanQrCode" />-->
+
+
+
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+

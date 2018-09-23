@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ArrangeActivities</string>
+    <string name="app_name">DrinkShopStore</string>
     <string name="text_Exit">Exit</string>
     <string name="text_Yes">Yes</string>
     <string name="text_No">No</string>
@@ -12,7 +12,7 @@
     <string name="text_activityName">Activity Name</string>
     <string name="text_activityDateStart">Start Date</string>
     <string name="text_activityDateEnd">End Date</string>
-    <string name="text_News">Arrange Activity</string>
+    <string name="text_News">輪播牆管理</string>
     <string name="msg_NameIsInvalid">News name is invalid</string>
     <string name="msg_NoImage">No image</string>
     <string name="msg_UpdateSuccess">Update successfully</string>
@@ -27,5 +27,87 @@
     <string name="text_NewsName">活動名稱</string>
     <string name="text_NewsDateStart">活動開始日期</string>
     <string name="text_NewsDateEnd">活動結束日期</string>
+    <string name="textStartDatePicker">Start Date Picker</string>
+    <string name="textEndDatePicker">End Date Picker</string>
+
+<!-- peko -->
+    <string name="text_ProductList">Product List</string>
+    <string name="text_ProductDetail">Product Details</string>
+    <string name="text_ProductInsert">Insert Product</string>
+    <string name="text_ProductUpdate">Update Product</string>
+    <string name="text_ProductDelete">Delete Product</string>
+
+    <!--<string name="col_OrderNo">訂單編號:</string>-->
+    <!--<string name="col_OrderDate">訂單時間:</string>-->
+
+    <string name="col_Name">Name</string>
+    <string name="col_PhoneNo">PhoneNo</string>
+    <string name="col_Address">Address</string>
+
+    <!--<string name="msg_NoOrderFound">No order found</string>-->
+    <string name="msg_NoProductsFound">No products found</string>
+    <string name="msg_MapNotDisplayed">Map cannot be displayed</string>
+    <string name="msg_ClickAgain">Please click the item again</string>
+
+    <string name="msg_NoDataFound">No data found</string>
+    <string name="text_NoCameraApp">no camera apps found</string>
+
+
+    <string name="text_ProductId">ID Number</string>
+    <string name="text_ProductName">Name</string>
+
+    <string name="text_TakePicture">Take Picture</string>
+
+    <string name="text_ProductPhone">Phone</string>
+    <string name="text_ProductAddress">Address</string>
+    <string name="text_NotGranted">not granted</string>
+    <!--<string name="text_Product">Product</string>-->
+    <string name="text_Open">Open</string>
+    <string name="text_Close">Close</string>
+
+
+    <string name="text_Product">商品管理</string>
+    <string name="text_Order">訂單管理</string>
+    <string name="text_Set">設定管理</string>
+
+    <string name="msg_NoOrdersFound">No orders found</string>
+    <string name="text_OrderTitle">Title</string>
+    <string name="text_OrderDetail">訂單明細：</string>
+    <string name="text_OrderDate">Date：</string>
+    <string name="msg_TitleIsInvalid">Product title is invalid</string>
+    <string name="text_TotalCap">總杯數：</string>
+    <string name="text_TotalAmount">總金額：</string>
+    <string name="text_Completed">Completed</string>
+    <string name="text_OrderNo">OrderNo</string>
+    <string name="hint_Completed">完成</string>
+    <string name="msg_OrderNoIsInvalid">Product orderNo is invalid</string>
+
+    <string name="msg_Category_nameIsInvalid">Category_name is invalid</string>
+    <string name="text_Category_id">Category_id</string>
+    <string name="text_Product_name">Product_name</string>
+    <string name="text_Product_desc">Product_desc</string>
+    <string name="text_Order_id">Order ID：</string>
+    <string name="text_Invoice">Invoice_no：</string>
+    <string name="text_Member">Member_name：</string>
+
+
+    <string name="textComplete">Complete</string>
+    <string name="col_OrderSum">Sum</string>
+    <string name="col_Price">Price</string>
+
+
+    <string name="text_Category_name">Category_name</string>
+    <string name="text_Product_no">Product_no</string>
+    <string name="text_Product_price">Product_price</string>
+    <string name="text_Size_name">Size_name</string>
+    <string name="text_OrderNumber">訂單號碼：</string>
+    <string name="text_Order_no">Order_no</string>
+    <string name="text_Product_Id">Product_ID：</string>
+
+    <string name="text_tvCategory">Category</string>
+    <!--<string name="text_btAddCategory">新增類別</string>-->
+    <string name="text_btAddCategory">ADD CATEGORY</string>
+    <string name="msg_NoCategoriesFound">No categories found</string>
+    <string name="text_btScanQRCode">SCAN QR CODE</string>
 
 </resources>

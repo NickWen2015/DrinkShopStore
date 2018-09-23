@@ -13,13 +13,14 @@
     <RelativeLayout
         android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent">
 
         <ImageView
             android:id="@+id/ivNewsPage"
-            android:layout_width="250px"
-            android:layout_height="250px"
-            android:src="@drawable/ic_launcher" />
+            android:layout_width="350px"
+            android:layout_height="350px"
+            android:src="@drawable/poster" />
 
 
         <TextView

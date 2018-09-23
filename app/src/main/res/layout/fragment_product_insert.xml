@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/ivProduct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:src="@drawable/product_pic" />
+
+            <Button
+                android:id="@+id/btPickPicture"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/btTakePicture"
+                android:layout_toRightOf="@+id/btTakePicture"
+                android:onClick="onPickPictureClick"
+                android:text="@string/text_PickPicture" />
+
+            <Button
+                android:id="@+id/btTakePicture"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ivProduct"
+                android:layout_below="@+id/ivProduct"
+                android:onClick="onTakePictureClick"
+                android:text="@string/text_TakePicture" />
+        </RelativeLayout>
+
+        <!--<EditText-->
+        <!--android:id="@+id/etCategory_name"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:hint="@string/text_Category_name"-->
+        <!--android:inputType="text"-->
+        <!--android:textColor="#0000FF" />-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btAddCategory"
+                android:layout_alignBottom="@+id/btAddCategory"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="5dp"
+                android:text="@string/text_tvCategory"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <Spinner
+                android:id="@+id/spCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/btAddCategory"
+                android:layout_marginLeft="10dp"
+                android:layout_toLeftOf="@+id/btAddCategory"
+                android:layout_toRightOf="@+id/tvCategory" />
+
+            <Button
+                android:id="@+id/btAddCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="onCategoryClick"
+                android:text="@string/text_btAddCategory" />
+        </RelativeLayout>
+
+
+        <!--<EditText-->
+        <!--android:id="@+id/etProduct_no"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:hint="@string/text_Product_no"-->
+        <!--android:inputType="text"-->
+        <!--android:textColor="#0000FF" />-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/etCategoryName"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:hint="@string/text_Category_name"-->
+            <!--android:inputType="text"-->
+            <!--android:textColor="#0000FF" />-->
+
+        <EditText
+            android:id="@+id/etProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:hint="@string/text_Product_name"
+            android:inputType="text"
+            android:textColor="#0000FF" />
+
+        <!--<EditText-->
+        <!--android:id="@+id/etProduct_desc"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:hint="@string/text_Product_desc"-->
+        <!--android:inputType="text"-->
+        <!--android:textColor="#0000FF" />-->
+
+        <EditText
+            android:id="@+id/etMPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:hint="MPrice"
+            android:inputType="text"
+            android:textColor="#0000FF" />
+
+        <EditText
+            android:id="@+id/etLPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:hint="LPrice"
+            android:inputType="text"
+            android:textColor="#0000FF" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
+            <Button
+                android:id="@+id/btFinishInsert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btCancel"
+                android:onClick="onFinishInsertClick"
+                android:text="@string/text_Insert" />
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/btFinishInsert"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="onCancelClick"
+                android:text="@string/text_btCancel" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</ScrollView>

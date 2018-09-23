@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:padding="6dp"
+    card_view:cardBackgroundColor="#ffdddddd"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="6dp">
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:textColor="#000000"
+            android:text="tvProduct_name"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/tvIceName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvProductName"
+            android:layout_below="@id/tvProductName"
+            android:text="tvIce_name"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/tvSugarName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvIceName"
+            android:layout_below="@id/tvIceName"
+            android:text="tvSugar_name"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/tvMPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvSugarName"
+            android:layout_below="@id/tvSugarName"
+            android:text="tvSize_name"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/tvOrderProductQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvMPrice"
+            android:layout_below="@id/tvMPrice"
+            android:text="tvOrderProductQuantity"
+            android:textColor="#555555" />
+
+        <TextView
+            android:id="@+id/tvOrderProductPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvOrderProductQuantity"
+            android:layout_below="@id/tvOrderProductQuantity"
+            android:text="tvOrderProductPrice"
+            android:textColor="#555555" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+

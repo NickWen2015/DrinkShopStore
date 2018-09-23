@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:padding="6dp"
+    card_view:cardBackgroundColor="#ffdddddd"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardElevation="6dp">
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ivProduct"
+            android:layout_width="250px"
+            android:layout_height="250px"
+            android:src="@drawable/product_pic" />
+
+        <TextView
+            android:id="@+id/tvCategoryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:layout_toRightOf="@id/ivProduct"
+            android:textColor="#000000"
+            android:text="CategoryName"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvProductName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvCategoryName"
+            android:layout_below="@id/tvCategoryName"
+            android:text="ProductName" />
+
+        <TextView
+            android:id="@+id/tvMPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvCategoryName"
+            android:layout_below="@id/tvProductName"
+            android:text="MPrice" />
+
+        <TextView
+            android:id="@+id/tvLPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tvCategoryName"
+            android:layout_below="@id/tvMPrice"
+            android:layout_marginTop="0dp"
+            android:text="LPrice" />
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

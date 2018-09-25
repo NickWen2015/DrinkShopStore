@@ -1,17 +1,31 @@
-package drinkshop.cp102.drinkshopstore.amain.product;
+package drinkshop.cp102.drinkshopstore.bean;
+
+
+import java.io.Serializable;
 
 /**
  * 商品
  * @author mrosstro
  * */
-public class Product {
-    private long id;
+public class Product implements Serializable {
+    private int id;
+    private int categoryId;
     private String Category;
     private String Name;
     private int MPrice;
     private int LPrice;
 
-    public Product(long id, String category, String name, int MPrice, int LPrice) {
+    public Product() { }
+
+    public Product(int id, int categoryId, String name, int MPrice, int LPrice) {
+        this.id = id;
+        this.categoryId = categoryId;
+        Name = name;
+        this.MPrice = MPrice;
+        this.LPrice = LPrice;
+    }
+
+    public Product(int id, String category, String name, int MPrice, int LPrice) {
         this.id = id;
         Category = category;
         Name = name;
@@ -19,12 +33,20 @@ public class Product {
         this.LPrice = LPrice;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
+    }
+
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategory() {

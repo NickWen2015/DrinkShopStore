@@ -145,7 +145,7 @@ public class NewsUpdateFragment extends Fragment {
     private void handleViews(View rootView) {
         ivNews = rootView.findViewById(R.id.ivNewsPage);
         btPickPicture = rootView.findViewById(R.id.btPickPicture);
-        btFinishUpdate = rootView.findViewById(R.id.btFinishUpdate);
+        btFinishUpdate = rootView.findViewById(R.id.btFinishInsert);
         tvId = rootView.findViewById(R.id.tvId);
         btCancel = rootView.findViewById(R.id.btCancel);
         etActivityName = rootView.findViewById(R.id.etActivityName);

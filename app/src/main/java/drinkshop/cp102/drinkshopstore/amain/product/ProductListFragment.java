@@ -2,6 +2,7 @@ package drinkshop.cp102.drinkshopstore.amain.product;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -25,12 +26,13 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.List;
 
 import drinkshop.cp102.drinkshopstore.Common;
 import drinkshop.cp102.drinkshopstore.R;
-import drinkshop.cp102.drinkshopstore.amain.order.Order;
+import drinkshop.cp102.drinkshopstore.bean.Product;
 import drinkshop.cp102.drinkshopstore.task.CommonTask;
 import drinkshop.cp102.drinkshopstore.task.ImageTask;
 
@@ -42,7 +44,9 @@ public class ProductListFragment extends Fragment {
     private ImageTask productImageTask;
     private FragmentActivity activity;
 
+    FloatingActionButton btAdd;
     ProductsRecyclerViewAdapter adapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,24 +60,23 @@ public class ProductListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
         handleView(view);  // 連結UI
 
-//        swipeRefreshLayout =
-//                view.findViewById(R.id.swipeRefreshLayout);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeRefreshLayout.setRefreshing(true);
-//                showAllProducts();
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        });
+
+        swipeRefreshLayout =
+                view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         rvProducts.setLayoutManager(new LinearLayoutManager(activity));
-        if(adapter == null) {
-            adapter = new ProductsRecyclerViewAdapter(activity, showAllProduct());
-        }
+        adapter = new ProductsRecyclerViewAdapter(activity, showAllProduct());
         rvProducts.setAdapter(adapter);
 
-        FloatingActionButton btAdd = view.findViewById(R.id.btAdd);
+
+
         btAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,27 +87,32 @@ public class ProductListFragment extends Fragment {
         return view;
     }
 
+
+
+    /**
+     * 取得所有的商品資訊
+     * */
     private List<Product> showAllProduct() {
-        List<Order> orders = null;
+        List<Product> products = null;
         if (Common.networkConnected(activity)) {
-            String url = Common.URL + "/OrdersServlet";
+            String url = Common.URL + "/ProductServlet";
             JsonObject jsonObject = new JsonObject();
             jsonObject.addProperty("action", "getAllProduct");
             String jsonOut = jsonObject.toString();
-            getAllProductTask = new CommonTask(url, jsonOut);
+            CommonTask getAllProductTask = new CommonTask(url, jsonOut);
             try {
                 String jsonIn = getAllProductTask.execute().get();
-                Type listType = new TypeToken<List<Order>>() {
+                Type listType = new TypeToken<List<Product>>() {
                 }.getType();
                 Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-                orders = gson.fromJson(jsonIn, listType);
+                products = gson.fromJson(jsonIn, listType);
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
         } else {
             Common.showToast(activity, R.string.msg_NoNetwork);
         }
-        return orders;
+        return products;
     }
 
     /**
@@ -113,41 +121,19 @@ public class ProductListFragment extends Fragment {
      * @param view 畫面
      * */
     private void handleView(View view) {
+        btAdd = view.findViewById(R.id.btAdd);
         rvProducts = view.findViewById(R.id.rvProduct);
     }
 
-    private List<Product> showAllProducts() {
-        if (Common.networkConnected(activity)) {
-            String url = Common.URL + "/ProductServlet";
-            List<Product> products = null;
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("action", "getAllProduct");
-            String jsonOut = jsonObject.toString();
-            productGetAllTask = new CommonTask(url, jsonOut);
-            try {
-                String jsonIn = productGetAllTask.execute().get();
-                Type listType = new TypeToken<List<Product>>() {
-                }.getType();
-                products = new Gson().fromJson(jsonIn, listType);
-            } catch (Exception e) {
-                Log.e(TAG, e.toString());
-            }
-            if (products == null || products.isEmpty()) {
-                Common.showToast(activity, R.string.msg_NoProductsFound);
-            } else {
-                rvProducts.setAdapter(new ProductsRecyclerViewAdapter(activity, products));
-            }
-        } else {
-            Common.showToast(activity, R.string.msg_NoNetwork);
-        }
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        showAllProducts();
-    }
-
+    /**
+     * adapter
+     *
+     *
+     *
+     *
+     *
+     * */
     private class ProductsRecyclerViewAdapter extends RecyclerView.Adapter<ProductsRecyclerViewAdapter.MyViewHolder> {
         private LayoutInflater layoutInflater;
         private List<Product> products;
@@ -159,20 +145,6 @@ public class ProductListFragment extends Fragment {
             /* 螢幕寬度除以4當作將圖的尺寸 */
             imageSize = getResources().getDisplayMetrics().widthPixels / 3;
 
-        }
-
-        class MyViewHolder extends RecyclerView.ViewHolder {
-            ImageView imageView;
-            TextView tvCategoryName, tvProductName, tvSizeName, tvProductPrice;
-
-            MyViewHolder(View itemView) {
-                super(itemView);
-                imageView = itemView.findViewById(R.id.ivProduct);
-                tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
-                tvProductName = itemView.findViewById(R.id.tvProductName);
-                tvSizeName = itemView.findViewById(R.id.tvMPrice);
-                tvProductPrice = itemView.findViewById(R.id.tvProductPrice);
-            }
         }
 
         @Override
@@ -187,17 +159,34 @@ public class ProductListFragment extends Fragment {
             return new MyViewHolder(itemView);
         }
 
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            ImageView ivProduct;
+            TextView tvCategoryName;
+            TextView tvProductName;
+            TextView tvMPrice;
+            TextView tvLPrice;
+
+            MyViewHolder(View itemView) {
+                super(itemView);
+                ivProduct = itemView.findViewById(R.id.ivProduct);
+                tvCategoryName = itemView.findViewById(R.id.tvCategoryName);
+                tvProductName = itemView.findViewById(R.id.tvProductName);
+                tvMPrice = itemView.findViewById(R.id.tvMPrice);
+                tvLPrice = itemView.findViewById(R.id.tvLPrice);
+            }
+        }
+
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
             final Product product = products.get(position);
             String url = Common.URL + "/ProductServlet";
-            int product_id = product.getProduct_id();
-            productImageTask = new ImageTask(url, product_id, imageSize, myViewHolder.imageView); //把imageView傳過去,直接show圖.因為主執行緒等待時間可以處理user往下滑的圖的id...,所以不用get
+            final int product_id = product.getId();
+            productImageTask = new ImageTask(url, product_id, imageSize, myViewHolder.ivProduct); //把imageView傳過去,直接show圖.因為主執行緒等待時間可以處理user往下滑的圖的id...,所以不用get
             productImageTask.execute();
-            myViewHolder.tvCategoryName.setText(product.getCategory_name());
-            myViewHolder.tvProductName.setText(product.getProduct_name());
-            myViewHolder.tvSizeName.setText(product.getSize_name());
-            myViewHolder.tvProductPrice.setText(product.getProduct_price());
+            myViewHolder.tvCategoryName.setText(product.getCategory());
+            myViewHolder.tvProductName.setText(product.getName());
+            myViewHolder.tvMPrice.setText("" + product.getMPrice());
+            myViewHolder.tvLPrice.setText("" + product.getLPrice());
 //            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {
@@ -212,7 +201,7 @@ public class ProductListFragment extends Fragment {
                 @Override
                 public boolean onLongClick(View view) {
                     PopupMenu popupMenu = new PopupMenu(activity, view, Gravity.END);
-                    popupMenu.inflate(R.menu.menu_popup);
+                    popupMenu.inflate(R.menu.popup_menu);
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
@@ -229,7 +218,7 @@ public class ProductListFragment extends Fragment {
                                         String url = Common.URL + "/ProductServlet";
                                         JsonObject jsonObject = new JsonObject();
                                         jsonObject.addProperty("action", "productDelete");
-                                        jsonObject.addProperty("product", new Gson().toJson(product));
+                                        jsonObject.addProperty("product_id", product.getId());
                                         int count = 0;
                                         try {
                                             productDeleteTask = new CommonTask(url, jsonObject.toString());
@@ -266,7 +255,6 @@ public class ProductListFragment extends Fragment {
                     replace(R.id.content, fragment).addToBackStack(null).commit();
         }
     }
-
 
     @Override
     public void onStop() {

@@ -4,17 +4,17 @@
     <string name="text_Yes">Yes</string>
     <string name="text_No">No</string>
     <string name="msg_WantToExit">Do you really want to exit?</string>
-    <string name="msg_InsertSuccess">Insert successfully</string>
-    <string name="msg_InsertFail">Insert fail</string>
+    <string name="msg_InsertSuccess">新增商品 成功！</string>
+    <string name="msg_InsertFail">新增商品 失敗！</string>
     <string name="msg_NoNewsFound">No news found</string>
-    <string name="msg_NoNetwork">no network connection available</string>
+    <string name="msg_NoNetwork">沒有可用的網絡連接</string>
     <string name="text_PickPicture">Pick Picture</string>
     <string name="text_activityName">Activity Name</string>
     <string name="text_activityDateStart">Start Date</string>
     <string name="text_activityDateEnd">End Date</string>
     <string name="text_News">輪播牆管理</string>
     <string name="msg_NameIsInvalid">News name is invalid</string>
-    <string name="msg_NoImage">No image</string>
+    <string name="msg_NoImage">沒有圖片</string>
     <string name="msg_UpdateSuccess">Update successfully</string>
     <string name="msg_UpdateFail">Update fail</string>
     <string name="msg_DeleteSuccess">Delete successfully</string>
@@ -71,7 +71,7 @@
     <string name="text_Set">設定管理</string>
 
     <string name="msg_NoOrdersFound">No orders found</string>
-    <string name="text_OrderTitle">Title</string>
+    <string name="text_OrderTitle">訂單管理</string>
     <string name="text_OrderDetail">訂單明細：</string>
     <string name="text_OrderDate">Date：</string>
     <string name="msg_TitleIsInvalid">Product title is invalid</string>

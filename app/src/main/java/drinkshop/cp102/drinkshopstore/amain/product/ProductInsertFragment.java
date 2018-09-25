@@ -36,10 +36,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import drinkshop.cp102.drinkshopstore.Common;
 import drinkshop.cp102.drinkshopstore.R;
+import drinkshop.cp102.drinkshopstore.bean.Category;
+import drinkshop.cp102.drinkshopstore.bean.Product;
 import drinkshop.cp102.drinkshopstore.task.CommonTask;
 
 import static android.app.Activity.RESULT_OK;
@@ -50,7 +55,7 @@ public class ProductInsertFragment extends Fragment {
     private FragmentManager fragmentManager;
     private ImageView ivProduct;
     private Button btTakePicture, btPickPicture, btFinishInsert, btCancel, btAddCategory;
-    private EditText etProductName, etSizeName, etProductPrice;
+    private EditText etProductName, etMPrice, etLPrice;
     private byte[] image;
     private static final int REQ_TAKE_PICTURE = 0;
     private static final int REQ_PICK_IMAGE = 1;
@@ -59,7 +64,7 @@ public class ProductInsertFragment extends Fragment {
     private Spinner spCategory;
     private CommonTask categoryGetAllTask;
 
-    public ProductInsertFragment() { }
+    Set<Category> categoryHashSet = new HashSet<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,8 +77,10 @@ public class ProductInsertFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View rootView = inflater.inflate(R.layout.fragment_product_insert, container, false);
-        findViews(rootView);
+        View view = inflater.inflate(R.layout.fragment_product_insert, container, false);
+
+        findViews(view);
+
         btTakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,16 +112,23 @@ public class ProductInsertFragment extends Fragment {
         btFinishInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int categoryId = 0;
                 Object item = spCategory.getSelectedItem();
-                String category_name = item.toString().trim();
-//                String category_name = etCategoryName.getText().toString().trim();
-                if (category_name.length() <= 0) {
+                String categoryName = item.toString().trim();
+                if (categoryName.length() <= 0) {
                     Common.showToast(getActivity(), R.string.msg_Category_nameIsInvalid);
                     return;
                 }
+                for(Category category : categoryHashSet) {
+                    if (category.getCategory_name().equals(categoryName)) {
+                        categoryId = category.getCategory_id();
+                    }
+                }
+//                String category_name = etCategoryName.getText().toString().trim();
+
                 String product_name = etProductName.getText().toString().trim();
-                String size_name = etSizeName.getText().toString().trim();
-                String product_price = etProductPrice.getText().toString().trim();
+                int MPrice = Integer.valueOf(etMPrice.getText().toString().trim());
+                int LPrice = Integer.valueOf(etLPrice.getText().toString().trim());
 
                 if (image == null) {
                     Common.showToast(getActivity(), R.string.msg_NoImage);
@@ -123,7 +137,7 @@ public class ProductInsertFragment extends Fragment {
 
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL + "/ProductServlet";
-                    Product product = new Product(0, category_name, product_name, size_name, product_price);
+                    Product product = new Product(0, categoryId, product_name, MPrice, LPrice);
                     String imageBase64 = Base64.encodeToString(image, Base64.DEFAULT);
                     JsonObject jsonObject = new JsonObject();
                     jsonObject.addProperty("action", "productInsert"); // 告訴server要做什麼
@@ -165,7 +179,20 @@ public class ProductInsertFragment extends Fragment {
             }
         });
 
-        return rootView;
+        return view;
+    }
+
+    private void findViews(View rootView) {
+        ivProduct = rootView.findViewById(R.id.ivProduct);
+        btTakePicture = rootView.findViewById(R.id.btTakePicture);
+        btPickPicture = rootView.findViewById(R.id.btPickPicture);
+        btFinishInsert = rootView.findViewById(R.id.btFinishInsert);
+        btCancel = rootView.findViewById(R.id.btCancel);
+        etProductName = rootView.findViewById(R.id.etProductName);
+        etMPrice = rootView.findViewById(R.id.etMPrice);
+        etLPrice = rootView.findViewById(R.id.etLPrice);
+        spCategory = rootView.findViewById(R.id.spCategory);
+        btAddCategory = rootView.findViewById(R.id.btAddCategory);
     }
 
     private void switchFragment(Fragment fragment) {
@@ -175,7 +202,12 @@ public class ProductInsertFragment extends Fragment {
         }
     }
 
+    /**
+     * 設定sp的內容物
+     * */
     private void showAllCategories() {
+
+        List<String> categorys = new ArrayList<>();
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "/ProductServlet";
             List<Category> categories = null;
@@ -188,13 +220,19 @@ public class ProductInsertFragment extends Fragment {
                 Type listType = new TypeToken<List<Category>>() {
                 }.getType();
                 categories = new Gson().fromJson(jsonIn, listType);
+
+                for(Category category : categories) {  //將拿到的類別並取出類別名稱裝在categorys中等待使用
+                    categorys.add(category.getCategory_name());
+                    categoryHashSet.add(new Category(category.getCategory_id(), category.getCategory_name()));
+                }
+
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
             if (categories == null || categories.isEmpty()) {
                 Common.showToast(activity, R.string.msg_NoCategoriesFound);
             } else {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, categories);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categorys);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spCategory.setAdapter(adapter);
             }
@@ -208,19 +246,6 @@ public class ProductInsertFragment extends Fragment {
     public void onStart() {
         super.onStart();
         showAllCategories();
-    }
-
-    private void findViews(View rootView) {
-        ivProduct = rootView.findViewById(R.id.ivProduct);
-        btTakePicture = rootView.findViewById(R.id.btTakePicture);
-        btPickPicture = rootView.findViewById(R.id.btPickPicture);
-        btFinishInsert = rootView.findViewById(R.id.btFinishInsert);
-        btCancel = rootView.findViewById(R.id.btCancel);
-        etProductName = rootView.findViewById(R.id.etProductName);
-        etSizeName = rootView.findViewById(R.id.etSizeName);
-        etProductPrice = rootView.findViewById(R.id.etProductPrice);
-        spCategory = rootView.findViewById(R.id.spCategory);
-        btAddCategory = rootView.findViewById(R.id.btAddCategory);
     }
 
     private boolean isIntentAvailable(Context context, Intent intent) {
@@ -294,4 +319,4 @@ public class ProductInsertFragment extends Fragment {
         }
     }
 
-//}
+}

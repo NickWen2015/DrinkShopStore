@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
      * 初始畫面
      */
     private void initContent() {
-        Fragment fragment = new OrderListFragment();
+        Fragment fragment = new ProductListFragment();
         changeFragment(fragment);
-        setTitle(R.string.text_OrderTitle);
+        setTitle(R.string.text_Product);
     }
 
     /**

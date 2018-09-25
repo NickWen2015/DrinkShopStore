@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:hint="@string/text_Category_name"
+            android:hint="請輸入類別名稱"
             android:inputType="text"
             android:textColor="#0000FF" />
 
@@ -26,23 +26,23 @@
             android:layout_marginTop="3dp">
 
             <Button
-                android:id="@+id/btFinishUpdate"
+                android:id="@+id/btFinishInsert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btCancel"
                 android:onClick="onFinishUpdateClick"
-                android:text="@string/text_Update" />
+                android:text="新增" />
 
             <Button
                 android:id="@+id/btCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btFinishUpdate"
+                android:layout_alignBaseline="@+id/btFinishInsert"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCancelClick"
-                android:text="@string/text_btCancel" />
+                android:text="取消" />
         </RelativeLayout>
     </LinearLayout>
 

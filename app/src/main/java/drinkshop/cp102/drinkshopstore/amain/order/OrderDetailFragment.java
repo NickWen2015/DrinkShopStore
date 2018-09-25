@@ -30,10 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import drinkshop.cp102.drinkshopstore.Common;
+import drinkshop.cp102.drinkshopstore.R;
 import drinkshop.cp102.drinkshopstore.task.CommonTask;
-import idv.ron.store.R;
-import idv.ron.store.main.Common;
-import idv.ron.store.main.task.CommonTask;
+
 
 public class OrderDetailFragment extends Fragment {
     private final static String TAG = "OrderDetailFragment";

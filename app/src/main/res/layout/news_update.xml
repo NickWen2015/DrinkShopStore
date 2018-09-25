@@ -83,7 +83,7 @@
             android:layout_marginTop="3dp">
 
         <Button
-            android:id="@+id/btFinishUpdate"
+            android:id="@+id/btFinishInsert"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -95,7 +95,7 @@
                 android:id="@+id/btCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btFinishUpdate"
+                android:layout_alignBaseline="@+id/btFinishInsert"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCancelClick"

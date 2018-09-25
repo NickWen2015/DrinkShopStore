@@ -10,7 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +21,12 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
-import idv.ron.store.R;
-import idv.ron.store.main.Common;
-import idv.ron.store.main.task.CommonTask;
+import drinkshop.cp102.drinkshopstore.Common;
+import drinkshop.cp102.drinkshopstore.R;
+import drinkshop.cp102.drinkshopstore.bean.Category;
+import drinkshop.cp102.drinkshopstore.halper.LogHelper;
+import drinkshop.cp102.drinkshopstore.task.CommonTask;
+
 
 public class ProductInsertCategoryFragment extends Fragment {
     private final static String TAG = "ProductInsertCategoryFragment";
@@ -43,6 +45,12 @@ public class ProductInsertCategoryFragment extends Fragment {
         fragmentManager = getFragmentManager();
     }
 
+    private void findViews(View rootView) {
+        btFinishInsert = rootView.findViewById(R.id.btFinishInsert);
+        btCancel = rootView.findViewById(R.id.btCancel);
+        etCategoryName = rootView.findViewById(R.id.etCategoryName);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -53,25 +61,24 @@ public class ProductInsertCategoryFragment extends Fragment {
         btFinishInsert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String category_name = etCategoryName.getText().toString().trim();
-                if (category_name.length() <= 0) {
+                String categoryName = etCategoryName.getText().toString().trim();
+                if (categoryName.length() <= 0) {
                     Common.showToast(getActivity(), R.string.msg_Category_nameIsInvalid);
                     return;
                 }
 
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL + "/ProductServlet";
-                    Category category = new Category(0, category_name);
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("action", "productInsert"); // 告訴server要做什麼
-                    jsonObject.addProperty("category", new Gson().toJson(category));
+                    jsonObject.addProperty("action", "insertCategory"); // 告訴server要做什麼
+                    jsonObject.addProperty("categoryName", categoryName);
 
                     int count = 0;
                     try {
                         String result = new CommonTask(url, jsonObject.toString()).execute().get();
                         count = Integer.valueOf(result);
                     } catch (Exception e) {
-                        Log.e(TAG, e.toString());
+                        LogHelper.e(TAG, e.toString());
                     }
                     if (count == 0) {
                         Common.showToast(getActivity(), R.string.msg_InsertFail);
@@ -105,13 +112,7 @@ public class ProductInsertCategoryFragment extends Fragment {
 //    }
 
 
-    private void findViews(View rootView) {
 
-        btFinishInsert = rootView.findViewById(R.id.btFinishInsert);
-        btCancel = rootView.findViewById(R.id.btCancel);
-        etCategoryName = rootView.findViewById(R.id.etCategoryName);
-
-    }
 
     private boolean isIntentAvailable(Context context, Intent intent) {
         PackageManager packageManager = context.getPackageManager();

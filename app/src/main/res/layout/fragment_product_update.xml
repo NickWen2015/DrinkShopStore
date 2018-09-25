@@ -130,20 +130,20 @@
         <!--android:textColor="#0000FF" />-->
 
         <EditText
-            android:id="@+id/etSizeName"
+            android:id="@+id/etMPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:hint="@string/text_Size_name"
+            android:hint="MPrice"
             android:inputType="text"
             android:textColor="#0000FF" />
 
         <EditText
-            android:id="@+id/etProductPrice"
+            android:id="@+id/etLPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:hint="@string/text_Product_price"
+            android:hint="LPrice"
             android:inputType="text"
             android:textColor="#0000FF" />
 
@@ -154,7 +154,7 @@
             android:layout_marginTop="3dp">
 
             <Button
-                android:id="@+id/btFinishUpdate"
+                android:id="@+id/btFinishInsert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -166,7 +166,7 @@
                 android:id="@+id/btCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/btFinishUpdate"
+                android:layout_alignBaseline="@+id/btFinishInsert"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCancelClick"

@@ -37,12 +37,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import idv.ron.store.R;
-import idv.ron.store.main.Common;
-import idv.ron.store.main.task.CommonTask;
-import idv.ron.store.main.task.ImageTask;
+import drinkshop.cp102.drinkshopstore.Common;
+import drinkshop.cp102.drinkshopstore.R;
+import drinkshop.cp102.drinkshopstore.bean.Category;
+import drinkshop.cp102.drinkshopstore.bean.Product;
+import drinkshop.cp102.drinkshopstore.task.CommonTask;
+import drinkshop.cp102.drinkshopstore.task.ImageTask;
+
 
 import static android.app.Activity.RESULT_OK;
 
@@ -52,7 +58,7 @@ public class ProductUpdateFragment extends Fragment {
     private FragmentManager fragmentManager;
     private ImageView ivProduct;
     private Button btTakePicture, btPickPicture, btFinishUpdate, btCancel, btAddCategory;
-    private EditText etProductName, etSizeName, etProductPrice;
+    private EditText etProductName, etMPrice, etLPrice;
     private TextView tvProductId;
     private Product product;
     private byte[] image;
@@ -62,6 +68,8 @@ public class ProductUpdateFragment extends Fragment {
     private Uri contentUri, croppedImageUri;
     private Spinner spCategory;
     private CommonTask categoryGetAllTask;
+
+    Set<Category> categoryHashSet = new HashSet<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,24 +93,24 @@ public class ProductUpdateFragment extends Fragment {
         product = (Product) bundle.getSerializable("product");
         dataBindViews();
 
-        btTakePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // 指定存檔路徑
-                File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                file = new File(file, "picture.jpg");
-                contentUri = FileProvider.getUriForFile(
-                        activity, activity.getPackageName() + ".provider", file);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
-
-                if (isIntentAvailable(activity, intent)) {
-                    startActivityForResult(intent, REQ_TAKE_PICTURE);
-                } else {
-                    Common.showToast(activity, R.string.text_NoCameraApp);
-                }
-            }
-        });
+//        btTakePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                // 指定存檔路徑
+//                File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//                file = new File(file, "picture.jpg");
+//                contentUri = FileProvider.getUriForFile(
+//                        activity, activity.getPackageName() + ".provider", file);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+//
+//                if (isIntentAvailable(activity, intent)) {
+//                    startActivityForResult(intent, REQ_TAKE_PICTURE);
+//                } else {
+//                    Common.showToast(activity, R.string.text_NoCameraApp);
+//                }
+//            }
+//        });
 
         btPickPicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,28 +124,37 @@ public class ProductUpdateFragment extends Fragment {
         btFinishUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int categoryId = 0;
                 Object item = spCategory.getSelectedItem();
-                String category_name = item.toString().trim();
-//                String category_name = etCategoryName.getText().toString();
-                if (category_name.length() <= 0) {
-                    Common.showToast(activity, R.string.msg_Category_nameIsInvalid);
+                String categoryName = item.toString().trim();
+                if (categoryName.length() <= 0) {
+                    Common.showToast(getActivity(), R.string.msg_Category_nameIsInvalid);
                     return;
                 }
-                String product_name = etProductName.getText().toString();
-                String size_name = etSizeName.getText().toString().trim();
-                String product_price = etProductPrice.getText().toString();
+                for(Category category : categoryHashSet) {
+                    if (category.getCategory_name().equals(categoryName)) {
+                        categoryId = category.getCategory_id();
+                    }
+                }
+//                String category_name = etCategoryName.getText().toString().trim();
+
+                int productId = Integer.valueOf(tvProductId.getText().toString().trim());
+                String product_name = etProductName.getText().toString().trim();
+                int MPrice = Integer.valueOf(etMPrice.getText().toString().trim());
+                int LPrice = Integer.valueOf(etLPrice.getText().toString().trim());
+
                 if (image == null) {
-                    Common.showToast(activity, R.string.msg_NoImage);
+                    Common.showToast(getActivity(), R.string.msg_NoImage);
                     return;
                 }
 
                 if (Common.networkConnected(activity)) {
                     String url = Common.URL + "/ProductServlet";
-                    Product newProduct = new Product(product.getProduct_id(), category_name, product_name, size_name, product_price);
+                    Product product = new Product(productId, categoryId, product_name, MPrice, LPrice);
                     String imageBase64 = Base64.encodeToString(image, Base64.DEFAULT);
                     JsonObject jsonObject = new JsonObject();
-                    jsonObject.addProperty("action", "productUpdate");
-                    jsonObject.addProperty("product", new Gson().toJson(newProduct));
+                    jsonObject.addProperty("action", "productUpdate"); // 告訴server要做什麼
+                    jsonObject.addProperty("product", new Gson().toJson(product));
                     jsonObject.addProperty("imageBase64", imageBase64);
                     int count = 0;
                     try {
@@ -147,12 +164,12 @@ public class ProductUpdateFragment extends Fragment {
                         Log.e(TAG, e.toString());
                     }
                     if (count == 0) {
-                        Common.showToast(activity, R.string.msg_UpdateFail);
+                        Common.showToast(getActivity(), R.string.msg_InsertFail);
                     } else {
-                        Common.showToast(activity, R.string.msg_UpdateSuccess);
+                        Common.showToast(getActivity(), R.string.msg_InsertSuccess);
                     }
                 } else {
-                    Common.showToast(activity, R.string.msg_NoNetwork);
+                    Common.showToast(getActivity(), R.string.msg_NoNetwork);
                 }
                 /* 回前一個Fragment */
                 fragmentManager.popBackStack();
@@ -185,7 +202,12 @@ public class ProductUpdateFragment extends Fragment {
         }
     }
 
+    /**
+     * 設定sp的內容物
+     * */
     private void showAllCategories() {
+
+        List<String> categorys = new ArrayList<>();
         if (Common.networkConnected(activity)) {
             String url = Common.URL + "/ProductServlet";
             List<Category> categories = null;
@@ -198,14 +220,19 @@ public class ProductUpdateFragment extends Fragment {
                 Type listType = new TypeToken<List<Category>>() {
                 }.getType();
                 categories = new Gson().fromJson(jsonIn, listType);
+
+                for(Category category : categories) {  //將拿到的類別並取出類別名稱裝在categorys中等待使用
+                    categorys.add(category.getCategory_name());
+                    categoryHashSet.add(new Category(category.getCategory_id(), category.getCategory_name()));
+                }
+
             } catch (Exception e) {
                 Log.e(TAG, e.toString());
             }
             if (categories == null || categories.isEmpty()) {
                 Common.showToast(activity, R.string.msg_NoCategoriesFound);
             } else {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(),
-                        android.R.layout.simple_list_item_1, categories);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categorys);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spCategory.setAdapter(adapter);
             }
@@ -225,20 +252,19 @@ public class ProductUpdateFragment extends Fragment {
         ivProduct = rootView.findViewById(R.id.ivProduct);
         btTakePicture = rootView.findViewById(R.id.btTakePicture);
         btPickPicture = rootView.findViewById(R.id.btPickPicture);
-        btFinishUpdate = rootView.findViewById(R.id.btFinishUpdate);
+        btFinishUpdate = rootView.findViewById(R.id.btFinishInsert);
         tvProductId = rootView.findViewById(R.id.tvProductId);
         btCancel = rootView.findViewById(R.id.btCancel);
         etProductName = rootView.findViewById(R.id.etProductName);
-        etSizeName = rootView.findViewById(R.id.etSizeName);
-        etProductPrice = rootView.findViewById(R.id.etProductPrice);
+        etMPrice = rootView.findViewById(R.id.etMPrice);
+        etLPrice = rootView.findViewById(R.id.etLPrice);
         spCategory = rootView.findViewById(R.id.spCategory);
         btAddCategory = rootView.findViewById(R.id.btAddCategory);
-
     }
 
     private void dataBindViews() {
         String url = Common.URL + "/ProductServlet";
-        int productId = product.getProduct_id();
+        int productId = product.getId();
         int imageSize = getResources().getDisplayMetrics().widthPixels / 3;
         Bitmap bitmap = null;
         try {
@@ -258,18 +284,18 @@ public class ProductUpdateFragment extends Fragment {
         tvProductId.setText(String.valueOf(productId));
 //        etCategoryName.setText(product.getCategory_name());
 
-        etProductName.setText(product.getProduct_name());
+        etProductName.setText(product.getName());
 
-        etSizeName.setText(product.getSize_name());
-        etProductPrice.setText(product.getProduct_price());
+        etMPrice.setText("" + product.getMPrice());
+        etLPrice.setText("" + product.getLPrice());
     }
 
-    private boolean isIntentAvailable(Context context, Intent intent) {
-        PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
-                PackageManager.MATCH_DEFAULT_ONLY);
-        return list.size() > 0;
-    }
+//    private boolean isIntentAvailable(Context context, Intent intent) {
+//        PackageManager packageManager = context.getPackageManager();
+//        List<ResolveInfo> list = packageManager.queryIntentActivities(intent,
+//                PackageManager.MATCH_DEFAULT_ONLY);
+//        return list.size() > 0;
+//    }
 
 
     @Override

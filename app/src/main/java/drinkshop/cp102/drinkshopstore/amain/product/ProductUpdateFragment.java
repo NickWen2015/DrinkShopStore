@@ -57,7 +57,7 @@ public class ProductUpdateFragment extends Fragment {
     private FragmentActivity activity;
     private FragmentManager fragmentManager;
     private ImageView ivProduct;
-    private Button btTakePicture, btPickPicture, btFinishUpdate, btCancel, btAddCategory;
+    private Button btPickPicture, btFinishUpdate, btCancel, btAddCategory;
     private EditText etProductName, etMPrice, etLPrice;
     private TextView tvProductId;
     private Product product;
@@ -131,7 +131,7 @@ public class ProductUpdateFragment extends Fragment {
                     Common.showToast(getActivity(), R.string.msg_Category_nameIsInvalid);
                     return;
                 }
-                for(Category category : categoryHashSet) {
+                for (Category category : categoryHashSet) {
                     if (category.getCategory_name().equals(categoryName)) {
                         categoryId = category.getCategory_id();
                     }
@@ -204,7 +204,7 @@ public class ProductUpdateFragment extends Fragment {
 
     /**
      * 設定sp的內容物
-     * */
+     */
     private void showAllCategories() {
 
         List<String> categorys = new ArrayList<>();
@@ -221,7 +221,7 @@ public class ProductUpdateFragment extends Fragment {
                 }.getType();
                 categories = new Gson().fromJson(jsonIn, listType);
 
-                for(Category category : categories) {  //將拿到的類別並取出類別名稱裝在categorys中等待使用
+                for (Category category : categories) {  //將拿到的類別並取出類別名稱裝在categorys中等待使用
                     categorys.add(category.getCategory_name());
                     categoryHashSet.add(new Category(category.getCategory_id(), category.getCategory_name()));
                 }
@@ -235,11 +235,19 @@ public class ProductUpdateFragment extends Fragment {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, categorys);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spCategory.setAdapter(adapter);
-            }
 
+                int categoryIndex = 0;
+                for (String categoryName : categorys) {
+                    if (product.getCategory().equals(categoryName)) {
+                        categoryIndex = categorys.indexOf(categoryName);
+                    }
+                }
+                spCategory.setSelection(categoryIndex);
+            }
         } else {
             Common.showToast(activity, R.string.msg_NoNetwork);
         }
+
     }
 
     @Override
@@ -250,7 +258,7 @@ public class ProductUpdateFragment extends Fragment {
 
     private void handleViews(View rootView) {
         ivProduct = rootView.findViewById(R.id.ivProduct);
-        btTakePicture = rootView.findViewById(R.id.btTakePicture);
+//        btTakePicture = rootView.findViewById(R.id.btTakePicture);
         btPickPicture = rootView.findViewById(R.id.btPickPicture);
         btFinishUpdate = rootView.findViewById(R.id.btFinishInsert);
         tvProductId = rootView.findViewById(R.id.tvProductId);

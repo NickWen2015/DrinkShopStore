@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/shop_back_ground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,29 +18,30 @@
             <ImageView
                 android:id="@+id/ivProduct"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:layout_marginRight="12dp"
                 android:src="@drawable/product_pic" />
 
             <Button
                 android:id="@+id/btPickPicture"
-                style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/btTakePicture"
-                android:layout_toRightOf="@+id/btTakePicture"
+                android:layout_alignBottom="@+id/ivProduct"
+                android:layout_toRightOf="@+id/ivProduct"
                 android:onClick="onPickPictureClick"
-                android:text="@string/text_PickPicture" />
+                android:background="@drawable/button_style"
+                android:textSize="16dp"
+                android:text="@string/btPickPicture" />
 
-            <Button
-                android:id="@+id/btTakePicture"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/ivProduct"
-                android:layout_below="@+id/ivProduct"
-                android:onClick="onTakePictureClick"
-                android:text="@string/text_TakePicture" />
+            <!--<Button-->
+                <!--android:id="@+id/btTakePicture"-->
+                <!--style="?android:attr/buttonStyleSmall"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignLeft="@+id/ivProduct"-->
+                <!--android:layout_below="@+id/ivProduct"-->
+                <!--android:onClick="onTakePictureClick"-->
+                <!--android:text="@string/text_TakePicture" />-->
         </RelativeLayout>
 
         <TextView
@@ -89,7 +91,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCategoryClick"
-                android:text="@string/text_btAddCategory" />
+                android:background="@drawable/button_style"
+                android:textSize="16dp"
+                android:text="@string/btAddCategory" />
         </RelativeLayout>
 
 
@@ -160,7 +164,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btCancel"
                 android:onClick="onFinishUpdateClick"
-                android:text="@string/text_Update" />
+                android:background="@drawable/button_style"
+                android:layout_margin="10dp"
+                android:textSize="16dp"
+                android:text="@string/btUpdate" />
 
             <Button
                 android:id="@+id/btCancel"
@@ -170,7 +177,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCancelClick"
-                android:text="@string/text_btCancel" />
+                android:background="@drawable/button_style"
+                android:textSize="16dp"
+                android:text="@string/btCancel" />
         </RelativeLayout>
     </LinearLayout>
 

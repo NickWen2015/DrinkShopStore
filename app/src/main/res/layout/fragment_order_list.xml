@@ -32,22 +32,26 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="10"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="280dp"
-            app:cardCornerRadius="20dp">
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="280dp"-->
+            <!--app:cardCornerRadius="20dp">-->
 
             <Button
                 android:id="@+id/btScanQRCode"
-                android:layout_width="match_parent"
+                android:layout_width="150dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
                 android:onClick="onCancelClick"
-                android:text="@string/text_btScanQRCode" />
-        </android.support.v7.widget.CardView>
+                android:background="@drawable/button_style"
+                android:text="@string/btScanQRCode"
+                android:layout_gravity="right"
+                android:textSize="16dp"
+                android:layout_margin="10dp"/>
+
+        <!--</android.support.v7.widget.CardView>-->
     </LinearLayout>
 
 

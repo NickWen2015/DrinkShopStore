@@ -30,7 +30,10 @@
                 android:layout_alignLeft="@+id/ivNewsPage"
                 android:layout_below="@+id/ivNewsPage"
                 android:onClick="onPickPictureClick"
-                android:text="@string/text_PickPicture" />
+                android:background="@drawable/button_style"
+                android:layout_margin="10dp"
+                android:textSize="16dp"
+                android:text="@string/btPickPicture" />
 
         </RelativeLayout>
 
@@ -88,7 +91,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btCancel"
                 android:onClick="onFinishInsertClick"
-                android:text="@string/text_Insert" />
+                android:background="@drawable/button_style"
+                android:layout_margin="10dp"
+                android:textSize="16dp"
+                android:text="@string/btInsert" />
 
             <Button
                 android:id="@+id/btCancel"
@@ -98,7 +104,9 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCancelClick"
-                android:text="@string/text_btCancel" />
+                android:background="@drawable/button_style"
+                android:textSize="16dp"
+                android:text="@string/btCancel" />
 
         </RelativeLayout>
     </LinearLayout>

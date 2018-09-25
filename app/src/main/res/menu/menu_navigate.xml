@@ -3,6 +3,12 @@
 
 
     <item
+        android:id="@+id/item_News"
+        android:icon="@drawable/news_main"
+        android:title="@string/text_News"
+        />
+
+    <item
         android:id="@+id/item_Product"
         android:icon="@drawable/product_main"
         android:title="@string/text_Product"
@@ -12,11 +18,7 @@
         android:icon="@drawable/order_main"
         android:title="@string/text_Order"
         />
-    <item
-        android:id="@+id/item_News"
-        android:icon="@drawable/news_main"
-        android:title="@string/text_News"
-        />
+
 
 </menu>
 

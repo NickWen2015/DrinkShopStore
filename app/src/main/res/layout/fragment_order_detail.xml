@@ -99,29 +99,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="20dp">
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_weight="1"-->
+            <!--app:cardCornerRadius="20dp">-->
 
-        </android.support.v7.widget.CardView>
+        <!--</android.support.v7.widget.CardView>-->
 
-        <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            app:cardCornerRadius="20dp">
+        <!--<android.support.v7.widget.CardView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_weight="1"-->
+            <!--app:cardCornerRadius="20dp">-->
         <Button
             android:id="@+id/btCancel"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:onClick="onCancelClick"
-            android:text="@string/text_btCancel" />
-        </android.support.v7.widget.CardView>
+            android:background="@drawable/button_style"
+            android:layout_margin="10dp"
+            android:textSize="16dp"
+            android:text="@string/btCancel"
+            android:layout_gravity="right"/>
+        <!--</android.support.v7.widget.CardView>-->
     </LinearLayout>
 </LinearLayout>

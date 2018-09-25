@@ -109,5 +109,11 @@
     <string name="text_btAddCategory">ADD CATEGORY</string>
     <string name="msg_NoCategoriesFound">No categories found</string>
     <string name="text_btScanQRCode">SCAN QR CODE</string>
+    <string name="btScanQRCode">掃描 QR CODE</string>
+    <string name="btCancel">取消</string>
+    <string name="btPickPicture">選取 照片</string>
+    <string name="btAddCategory">增加 類別</string>
+    <string name="btInsert">新增</string>
+    <string name="btUpdate">更新</string>
 
 </resources>

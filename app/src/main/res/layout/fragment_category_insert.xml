@@ -32,6 +32,9 @@
                 android:layout_alignParentTop="true"
                 android:layout_toLeftOf="@+id/btCancel"
                 android:onClick="onFinishUpdateClick"
+                android:background="@drawable/button_style"
+                android:layout_margin="10dp"
+                android:textSize="16dp"
                 android:text="新增" />
 
             <Button
@@ -42,6 +45,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:onClick="onCancelClick"
+                android:background="@drawable/button_style"
+                android:textSize="16dp"
                 android:text="取消" />
         </RelativeLayout>
     </LinearLayout>

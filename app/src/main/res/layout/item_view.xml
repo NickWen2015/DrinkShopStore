@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ivNewsPage"
             android:onClick="onPickPictureClick"
-            android:text="@string/text_PickPicture" />
+            android:background="@drawable/button_style"
+            android:text="@string/btPickPicture" />
 
     </RelativeLayout>
 

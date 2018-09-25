@@ -34,6 +34,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 switch (item.getItemId()) {
+                    case R.id.item_News: //輪播牆頁面
+                        fragment = new NewsFragment();
+                        changeFragment(fragment);
+                        setTitle(R.string.text_News);
+                        return true;
                     case R.id.item_Product: //商品頁面
                         fragment = new ProductListFragment();
                         changeFragment(fragment);
@@ -43,11 +48,6 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new OrderListFragment();
                         changeFragment(fragment);
                         setTitle(R.string.text_Order);
-                        return true;
-                    case R.id.item_News: //輪播牆頁面
-                        fragment = new NewsFragment(); // ***OrderFragment要改成輪播牆的Fragment
-                        changeFragment(fragment);
-                        setTitle(R.string.text_News);
                         return true;
                     default:
                         initContent();
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
      * 初始畫面
      */
     private void initContent() {
-        Fragment fragment = new ProductListFragment();
+        Fragment fragment = new NewsFragment();
         changeFragment(fragment);
-        setTitle(R.string.text_Product);
+        setTitle(R.string.text_News);
     }
 
     /**

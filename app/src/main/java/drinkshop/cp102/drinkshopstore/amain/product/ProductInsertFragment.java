@@ -54,7 +54,7 @@ public class ProductInsertFragment extends Fragment {
     private FragmentActivity activity;
     private FragmentManager fragmentManager;
     private ImageView ivProduct;
-    private Button btTakePicture, btPickPicture, btFinishInsert, btCancel, btAddCategory;
+    private Button btPickPicture, btFinishInsert, btCancel, btAddCategory;
     private EditText etProductName, etMPrice, etLPrice;
     private byte[] image;
     private static final int REQ_TAKE_PICTURE = 0;
@@ -81,24 +81,24 @@ public class ProductInsertFragment extends Fragment {
 
         findViews(view);
 
-        btTakePicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // 指定存檔路徑
-                File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                file = new File(file, "picture.jpg");
-                contentUri = FileProvider.getUriForFile(
-                        activity, activity.getPackageName() + ".provider", file);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
-
-                if (isIntentAvailable(activity, intent)) {
-                    startActivityForResult(intent, REQ_TAKE_PICTURE);
-                } else {
-                    Common.showToast(getActivity(), R.string.text_NoCameraApp);
-                }
-            }
-        });
+//        btTakePicture.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                // 指定存檔路徑
+//                File file = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//                file = new File(file, "picture.jpg");
+//                contentUri = FileProvider.getUriForFile(
+//                        activity, activity.getPackageName() + ".provider", file);
+//                intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+//
+//                if (isIntentAvailable(activity, intent)) {
+//                    startActivityForResult(intent, REQ_TAKE_PICTURE);
+//                } else {
+//                    Common.showToast(getActivity(), R.string.text_NoCameraApp);
+//                }
+//            }
+//        });
 
         btPickPicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,7 +184,7 @@ public class ProductInsertFragment extends Fragment {
 
     private void findViews(View rootView) {
         ivProduct = rootView.findViewById(R.id.ivProduct);
-        btTakePicture = rootView.findViewById(R.id.btTakePicture);
+//        btTakePicture = rootView.findViewById(R.id.btTakePicture);
         btPickPicture = rootView.findViewById(R.id.btPickPicture);
         btFinishInsert = rootView.findViewById(R.id.btFinishInsert);
         btCancel = rootView.findViewById(R.id.btCancel);

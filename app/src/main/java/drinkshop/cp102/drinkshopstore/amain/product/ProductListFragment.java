@@ -183,10 +183,10 @@ public class ProductListFragment extends Fragment {
             final int product_id = product.getId();
             productImageTask = new ImageTask(url, product_id, imageSize, myViewHolder.ivProduct); //把imageView傳過去,直接show圖.因為主執行緒等待時間可以處理user往下滑的圖的id...,所以不用get
             productImageTask.execute();
-            myViewHolder.tvCategoryName.setText(product.getCategory());
-            myViewHolder.tvProductName.setText(product.getName());
-            myViewHolder.tvMPrice.setText("" + product.getMPrice());
-            myViewHolder.tvLPrice.setText("" + product.getLPrice());
+            myViewHolder.tvCategoryName.setText("類別："+product.getCategory());
+            myViewHolder.tvProductName.setText("品名："+product.getName());
+            myViewHolder.tvMPrice.setText("M單價：" + product.getMPrice());
+            myViewHolder.tvLPrice.setText("L單價：" + product.getLPrice());
 //            myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View view) {

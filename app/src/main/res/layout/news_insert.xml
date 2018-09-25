@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/shop_back_ground"
->
+    android:background="@drawable/shop_back_ground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="12dp" >
+            android:padding="12dp">
 
             <ImageView
                 android:id="@+id/ivNewsPage"
@@ -29,11 +28,12 @@
                 android:layout_height="wrap_content"
                 android:layout_alignLeft="@+id/ivNewsPage"
                 android:layout_below="@+id/ivNewsPage"
-                android:onClick="onPickPictureClick"
                 android:background="@drawable/button_style"
+                android:onClick="onPickPictureClick"
                 android:layout_margin="10dp"
                 android:textSize="16dp"
                 android:text="@string/btPickPicture" />
+
 
         </RelativeLayout>
 
@@ -59,9 +59,9 @@
             android:textColor="#0000FF" />
 
         <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/textStartDatePicker"/>-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/textStartDatePicker"/>-->
 
         <EditText
             android:id="@+id/etActivityDateEnd"
@@ -73,16 +73,16 @@
             android:text="2018-09-15"
             android:textColor="#0000FF" />
         <!--<Button-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/textEndDatePicker"/>-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/textEndDatePicker"/>-->
 
 
         <RelativeLayout
             android:id="@+id/RelativeLayout1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp" >
+            android:layout_marginTop="3dp">
 
             <Button
                 android:id="@+id/btFinishInsert"
@@ -107,6 +107,7 @@
                 android:background="@drawable/button_style"
                 android:textSize="16dp"
                 android:text="@string/btCancel" />
+
 
         </RelativeLayout>
     </LinearLayout>

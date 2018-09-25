@@ -58,12 +58,7 @@ public class NewsInsertFragment extends Fragment {
         activity = getActivity();
         fragmentManager = getFragmentManager();
 
-
-
     }
-
-
-
 
     @Nullable
         @Override

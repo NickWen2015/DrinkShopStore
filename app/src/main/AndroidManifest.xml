@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     package="drinkshop.cp102.drinkshopstore">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,6 +28,12 @@
         </activity>
 
         <activity android:name=".amain.salesanalysis.PieChartActivity" />
+
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+
 
     </application>
 

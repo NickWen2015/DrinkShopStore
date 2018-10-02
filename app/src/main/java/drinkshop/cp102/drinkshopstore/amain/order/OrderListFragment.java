@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import drinkshop.cp102.drinkshopstore.Common;
+
 import drinkshop.cp102.drinkshopstore.R;
 import drinkshop.cp102.drinkshopstore.task.CommonTask;
 
@@ -62,24 +63,26 @@ public class OrderListFragment extends Fragment {
 
         handleView(view);
 
-//        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                swipeRefreshLayout.setRefreshing(true);
-//                showAllOrders();
-//                swipeRefreshLayout.setRefreshing(false);
-//            }
-//        });
-
         rvOrders.setLayoutManager(new LinearLayoutManager(activity));
-
         if(adapter == null) {
             adapter = new OrdersRecyclerViewAdapter(activity, showAllOrders());
         }
         rvOrders.setAdapter(adapter);
 
-        btScanQRCode.setOnClickListener(new View.OnClickListener() {
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                adapter.notifyDataSetChanged();
+                rvOrders.setAdapter(adapter);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+
+
+        btScanQRCode.setOnClickListener(new View.OnClickListener() {  // 按下ＱＲ掃描器
             @Override
             public void onClick(View v) {
                 /* 若在Activity內需要呼叫IntentIntegrator(Activity)建構式建立IntentIntegrator物件；
@@ -96,7 +99,7 @@ public class OrderListFragment extends Fragment {
                 // By default, the orientation is locked. Set to false to not lock.
                 integrator.setOrientationLocked(false); // 設定無效,都是橫的
                 // Set a prompt to display on the capture screen.
-                integrator.setPrompt("Scan a QR Code"); // 提示文字
+                integrator.setPrompt("請掃描客戶端 QRCode"); // 提示文字
                 // Initiates a scan
                 integrator.initiateScan();
             }
@@ -105,7 +108,7 @@ public class OrderListFragment extends Fragment {
         return view;
     }
 
-    @Override
+        @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) { //轉成文字
         super.onActivityResult(requestCode, resultCode, data);
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
@@ -116,6 +119,7 @@ public class OrderListFragment extends Fragment {
             if(result == null) {
                 Toast.makeText(activity, "找不到訂單！！！", Toast.LENGTH_LONG).show();
             } else {
+                adapter.notifyDataSetChanged();
                 Toast.makeText(activity, "訂單修改完成！！！", Toast.LENGTH_LONG).show();
             }
 
@@ -221,10 +225,10 @@ public class OrderListFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int position) {
             final Order order = orders.get(position);
-            myViewHolder.tvOrderId.setText("訂單號碼："+String.valueOf(order.getOrder_id()));
-            myViewHolder.tvInvoice.setText("發票號碼："+String.valueOf(order.getInvoice()));
-            myViewHolder.tvMember.setText("會員名稱："+String.valueOf(order.getMember_name()));
-            myViewHolder.tvDate.setText("訂購時間："+String.valueOf(order.getOrder_accept_time()));
+            myViewHolder.tvOrderId.setText("訂單號碼：" + String.valueOf(order.getOrder_id()));
+            myViewHolder.tvInvoice.setText("發票號碼：" + String.valueOf(order.getInvoice()));
+            myViewHolder.tvMember.setText("會員名稱：" + String.valueOf(order.getMember_name()));
+            myViewHolder.tvDate.setText("訂購時間：" + String.valueOf(order.getOrder_accept_time()));
 //            myViewHolder.tvDate.setText(String.format(Locale.getDefault(), "%tF %<tT", order.getOrder_accept_time()));
             myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

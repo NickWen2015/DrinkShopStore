@@ -112,7 +112,7 @@ public class NewsFragment extends Fragment {
             this.myNews = getAllNews();
             this.layoutInflater = LayoutInflater.from(context);
             /* 螢幕寬度除以4當作將圖的尺寸 */
-            this.imageSize = getResources().getDisplayMetrics().widthPixels /4; //client決定圖的大小。按比例的模式設定,不受螢幕大小或解析度限制
+            this.imageSize = getResources().getDisplayMetrics().widthPixels / 4; //client決定圖的大小。按比例的模式設定,不受螢幕大小或解析度限制
         }
 
         private List<News> getAllNews() {
